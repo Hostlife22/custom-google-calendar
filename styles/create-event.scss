@@ -1,0 +1,50 @@
+.create-event {
+    width: 413px;
+    height: 360px;
+    position: relative;
+
+    &__close-btn {
+        transform: rotate(45deg);
+        font-size: 27px;
+        background-color: transparent;
+        position: absolute;
+        right: 4px;
+        top: -6px;
+        cursor: pointer;
+        outline: none;
+    }
+}
+.event-form {
+    display: flex;
+    flex-direction: column;
+
+    input[type="text"] {
+        margin-top: 26px;
+        margin-left: 51px;
+        border-bottom: 1px solid #1a73e8;
+        line-height: 26px;
+        margin-bottom: 74px;
+    }
+
+    input[type="date"] {
+        margin-left: 46px;
+    }
+
+    textarea[name="description"] {
+        margin-top: 46px;
+        margin-left: 46px;
+    }
+
+    &__submit-btn {
+        background-color: #1a73e8;
+        position: absolute;
+        bottom: -7px;
+        right: -3px;
+        width: 123px;
+        height: 36px;
+        color: #ffffff;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}
