@@ -9,6 +9,8 @@ import { initEventForm } from './events/createEvent.js';
 document.addEventListener('DOMContentLoaded', () => {
   renderTimescale();
   setItem('displayedWeekStart', getStartOfWeek(new Date()));
+  setItem('eventIdToDelete', null);
+  setItem('eventIdToUpdate', null);
   renderWeek();
   renderHeader();
   initNavigation();
