@@ -15,6 +15,8 @@ function clearEventForm() {
 
 function onCloseEventForm() {
   setItem('eventIdToDelete', null);
+  setItem('eventIdToUpdate', null);
+
   closeModal();
   clearEventForm();
 }
