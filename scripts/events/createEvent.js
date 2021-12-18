@@ -59,6 +59,10 @@ function onCreateEvent(event) {
     setItem('eventIdToUpdate', null);
   }
 
+  if (!getItem('events')) {
+    setItem('events', []);
+  }
+
   setItem('events', descriptionForm);
   onCloseEventForm();
   renderEvents();

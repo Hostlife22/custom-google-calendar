@@ -7,10 +7,19 @@ export function eventValidator(startTime, endTime, date) {
     duration: null,
   };
 
-  obj.duration = (getDateTime(date, endTime) - getDateTime(date, startTime)) / (1000 * 60);
-  obj.duration <= 0
+  const DURATION_IN_MINUTES_MAX = 360;
+  const DURATION_IN_MINUTES_MIN = 0;
+
+  const TIMESTAMP_IN_SECONDS = 1000;
+  const TIMESTAMP_IN_MINUTES = 60;
+
+  obj.duration =
+    (getDateTime(date, endTime) - getDateTime(date, startTime)) /
+    (TIMESTAMP_IN_SECONDS * TIMESTAMP_IN_MINUTES);
+
+  obj.duration <= DURATION_IN_MINUTES_MIN
     ? (obj.message = 'Incorrect time entry')
-    : obj.duration >= 360
+    : obj.duration >= DURATION_IN_MINUTES_MAX
     ? (obj.message = 'The event should not last more than 6 hours')
     : (obj.message = 'Correct event time value');
 
@@ -18,7 +27,7 @@ export function eventValidator(startTime, endTime, date) {
 }
 
 export function isIntersection(enteredValue) {
-  const events = getItem('events');
+  const events = getItem('events') || [];
 
   if (events.length === 0) {
     return;
@@ -37,9 +46,13 @@ function getIntersection(event, events) {
 }
 
 export function checkingForDeletion(eventIdToDelete, events) {
+  const TIMESTAMP_IN_SECONDS = 1000;
+  const TIMESTAMP_IN_MINUTES = 60;
+
   const filteredEvents = events.find(({ id }) => id == eventIdToDelete);
   const currentTime = new Date();
-
-  const timeDifference = Math.abs((filteredEvents.start - currentTime) / (1000 * 60));
+  const timeDifference = Math.abs(
+    (new Date(filteredEvents.start) - currentTime) / (TIMESTAMP_IN_SECONDS * TIMESTAMP_IN_MINUTES),
+  );
   return timeDifference;
 }

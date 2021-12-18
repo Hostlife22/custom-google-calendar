@@ -8,7 +8,7 @@ export const updateEvent = () => {
   openModal();
   closePopup();
 
-  const events = getItem('events');
+  const events = getItem('events') || [];
   const eventIdToDelete = getItem('eventIdToDelete');
 
   const filteredEvents = events.filter(({ id }) => id == eventIdToDelete);

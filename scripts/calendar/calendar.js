@@ -55,7 +55,7 @@ export function renderLineTime() {
 
   if (
     calendarDayElement === null ||
-    getItem('displayedWeekStart').getMonth() !== currentTime.getMonth()
+    new Date(getItem('displayedWeekStart')).getMonth() !== currentTime.getMonth()
   ) {
     return;
   }
@@ -68,10 +68,12 @@ export function renderLineTime() {
       return;
     }
 
-    const firstElem = timeScale.firstChild;
+    const lineTimeElement = [...timeScale.childNodes].find((line) =>
+      line.classList.contains('current-time'),
+    );
 
-    firstElem === null
+    lineTimeElement === undefined
       ? timeScale.appendChild(currentTimeElem)
-      : timeScale.replaceChild(currentTimeElem, firstElem);
+      : timeScale.replaceChild(currentTimeElem, lineTimeElement);
   });
 }

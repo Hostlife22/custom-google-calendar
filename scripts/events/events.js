@@ -41,9 +41,13 @@ function handleEventClick(event) {
 }
 
 function removeEventsFromCalendar() {
-  const events = getItem('events');
-
-  events.map(({ id }) => document.querySelector(`.calendar__event[data-event="${id}"]`).remove());
+  const events = getItem('events') || [];
+  events.map(() => {
+    const eventElem = document.querySelector(`.calendar__event`);
+    if (eventElem !== null) {
+      eventElem.remove();
+    }
+  });
 }
 
 const createEventElement = (event) => {
@@ -64,24 +68,26 @@ const createEventElement = (event) => {
   const eventTime = new Date(event.start).getMinutes();
   const heightEvent = new Date(event.end) - new Date(event.start);
 
+  const TIMESTAMP_IN_SECONDS = 1000;
+  const TIMESTAMP_IN_MINUTES = 60;
+
   eventElement.style.top = `${eventTime}px`;
-  eventElement.style.height = `${heightEvent / (1000 * 60)}px`;
+  eventElement.style.height = `${heightEvent / (TIMESTAMP_IN_SECONDS * TIMESTAMP_IN_MINUTES)}px`;
 
   return eventElement;
 };
 
 export const renderEvents = () => {
-  const allEvents = getItem('events');
-
+  const allEvents = getItem('events') || [];
   const calendarDays = [...document.querySelectorAll('.calendar__day')];
 
   const week = calendarDays.map((el) => +el.dataset.day);
 
   const filteredEvents = allEvents.filter(({ start }) => {
     const eventDay = new Date(start).getDate();
-    // return week.includes(eventDay);
+
     if (week.includes(eventDay)) {
-      return new Date(start).getMonth() === getItem('displayedWeekStart').getMonth();
+      return new Date(start).getMonth() === new Date(getItem('displayedWeekStart')).getMonth();
     }
   });
 
@@ -94,6 +100,7 @@ export const renderEvents = () => {
     const temp = createEventElement(event);
     temp.style.backgroundColor = event.color;
     const element = document.querySelector(`[data-event="${temp.dataset.event}"]`);
+
     if (element !== null) {
       element.remove();
     }
@@ -103,14 +110,20 @@ export const renderEvents = () => {
 };
 
 export function onDeleteEvent() {
-  const events = getItem('events');
+  const events = getItem('events') || [];
   const eventIdToDelete = getItem('eventIdToDelete');
 
   const BEFORE_THE_EVENT_STARTS = 15;
 
+  const popupErrorElem = document.querySelector('.popup__error');
+  if (popupErrorElem !== null) {
+    popupErrorElem.remove();
+  }
+
   if (checkingForDeletion(eventIdToDelete, events) < BEFORE_THE_EVENT_STARTS) {
     const popupElem = document.querySelector('.popup__description');
     const span = document.createElement('div');
+
     span.classList.add('popup__error');
     span.textContent = 'The event cannot be deleted 15 minutes before the start';
     popupElem.append(span);

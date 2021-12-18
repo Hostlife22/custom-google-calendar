@@ -13,7 +13,7 @@ export function openPopup(x, y) {
 
 export function contentPopup(elem) {
   const eventId = elem.dataset.event;
-  const events = getItem('events');
+  const events = getItem('events') || [];
 
   const [filteredEvent] = events.filter(({ id }) => id === eventId);
 
@@ -21,7 +21,7 @@ export function contentPopup(elem) {
 
   popupDescriptionElem.innerHTML = `
   <p class="popup__title">${filteredEvent.title}</p>
-  <p class="popup__event">${filteredEvent.start.toLocaleDateString(
+  <p class="popup__event">${new Date(filteredEvent.start).toLocaleDateString(
     'en-US',
     options,
   )} at  ${getEventTime(filteredEvent.start)} - ${getEventTime(filteredEvent.end)} o'clock</p>

@@ -9,14 +9,16 @@ export function getDateEvent(selectedDate) {
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
 
-  if (month < 10) month = '0' + month;
-  if (day < 10) day = '0' + day;
+  const FIRST_TWO_DIGIT_NUMBER = 10;
+
+  if (month < FIRST_TWO_DIGIT_NUMBER) month = '0' + month;
+  if (day < FIRST_TWO_DIGIT_NUMBER) day = '0' + day;
 
   return year + '-' + month + '-' + day;
 }
 
 function eventHandler(day, dataAttribute) {
-  const date = new Date(getItem('displayedWeekStart').setDate(day));
+  const date = new Date(new Date(getItem('displayedWeekStart')).setDate(day));
   const startTime = getTimeRange(dataAttribute);
   const endTime = getTimeRange(+dataAttribute + 1);
 
