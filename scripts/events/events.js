@@ -113,12 +113,12 @@ export function onDeleteEvent() {
   const events = getItem('events') || [];
   const eventIdToDelete = getItem('eventIdToDelete');
 
-  const BEFORE_THE_EVENT_STARTS = 15;
-
   const popupErrorElem = document.querySelector('.popup__error');
   if (popupErrorElem !== null) {
     popupErrorElem.remove();
   }
+
+  const BEFORE_THE_EVENT_STARTS = 15;
 
   if (checkingForDeletion(eventIdToDelete, events) < BEFORE_THE_EVENT_STARTS) {
     const popupElem = document.querySelector('.popup__description');
