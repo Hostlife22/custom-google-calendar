@@ -312,7 +312,53 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
+.event-form__select-color {
+  display: flex;
+  align-items: center;
+  width: 44px;
+  height: 36px;
+  border-radius: 3px;
+  justify-content: space-around;
+  position: absolute;
+  right: 0;
+  top: 80px;
+}
+.event-form__select-color:hover {
+  background-color: rgba(32, 33, 36, 0.039);
+  transition: background-color 0.3s;
+}
+.event-form__colors {
+  position: absolute;
+  top: 8px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 64px;
+  height: 160px;
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12), 0px 5px 5px -3px rgba(0, 0, 0, 0.2);
+}
+.event-form__colors_hidden {
+  display: none;
+}
+.event-form__color {
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+.event-form__color:hover {
+  transform: scale(1.1);
+}
+.event-form__selected {
+  width: 18px;
+  height: 18px;
+  background-color: #1a73e8;
+  border-radius: 50%;
+}
 .calendar__event {
   padding: 5px;
   background-color: #1a73e8;

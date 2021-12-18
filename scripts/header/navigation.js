@@ -32,7 +32,6 @@ const onChangeWeek = (event) => {
       : getStartOfWeek(new Date());
 
   setItem('displayedWeekStart', new Date(changedMonth));
-
   renderHeader();
   renderCurrentMonth();
   renderWeek();

@@ -92,6 +92,7 @@ export const renderEvents = () => {
     const currentDayNode = calendarDayElem.childNodes;
     const timeSlot = currentDayNode[new Date(event.start).getHours()];
     const temp = createEventElement(event);
+    temp.style.backgroundColor = event.color;
     const element = document.querySelector(`[data-event="${temp.dataset.event}"]`);
     if (element !== null) {
       element.remove();

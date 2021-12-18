@@ -38,12 +38,15 @@ function onCreateEvent(event) {
     return;
   }
 
+  const selectedColorElem = document.querySelector('.event-form__selected');
+
   const descriptionForm = {
     id: Date.now().toString(),
     title: title === '' ? '(No title)' : title,
     description,
     start: getDateTime(date, startTime),
     end: getDateTime(date, endTime),
+    color: selectedColorElem.dataset.eventColor,
   };
 
   if (isIntersection(descriptionForm) !== undefined) {

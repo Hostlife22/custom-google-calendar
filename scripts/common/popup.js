@@ -18,6 +18,7 @@ export function contentPopup(elem) {
   const [filteredEvent] = events.filter(({ id }) => id === eventId);
 
   const options = { weekday: 'long', month: 'long', day: 'numeric' };
+
   popupDescriptionElem.innerHTML = `
   <p class="popup__title">${filteredEvent.title}</p>
   <p class="popup__event">${filteredEvent.start.toLocaleDateString(
