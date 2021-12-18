@@ -42,7 +42,9 @@ export function isIntersection(enteredValue) {
 }
 
 function getIntersection(event, events) {
-  return events.find(({ start, end }) => event.start < end && start < event.end);
+  return events.find(
+    ({ start, end }) => event.start < new Date(end) && new Date(start) < event.end,
+  );
 }
 
 export function checkingForDeletion(eventIdToDelete, events) {
