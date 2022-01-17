@@ -1,19 +1,20 @@
-import { getItem, setItem } from '../common/storage.js';
 import { openModal } from '../common/modal.js';
+import { getItem } from '../common/storage.js';
 import { getTimeRange } from '../common/time.utils.js';
 
 export function getDateEvent(selectedDate) {
   const date = new Date(selectedDate);
-
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
   const year = date.getFullYear();
-
   const FIRST_TWO_DIGIT_NUMBER = 10;
 
-  if (month < FIRST_TWO_DIGIT_NUMBER) month = '0' + month;
-  if (day < FIRST_TWO_DIGIT_NUMBER) day = '0' + day;
-
+  if (month < FIRST_TWO_DIGIT_NUMBER) {
+    month = '0' + month;
+  }
+  if (day < FIRST_TWO_DIGIT_NUMBER) {
+    day = '0' + day;
+  }
   return year + '-' + month + '-' + day;
 }
 
